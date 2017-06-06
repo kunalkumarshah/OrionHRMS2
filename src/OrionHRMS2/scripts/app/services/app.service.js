@@ -35,6 +35,29 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable"], function 
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
+                AppService.prototype.getCountry = function (id) {
+                    if (id == null)
+                        throw new Error("id is required.");
+                    var url = this.countriesUrl + id;
+                    return this.http.get(url)
+                        .map(function (response) { return response.json(); })
+                        .catch(this.handleError);
+                };
+                AppService.prototype.saveCountry = function (country) {
+                    if (country == null)
+                        throw new Error("Country not found.");
+                    var url = this.countriesUrl;
+                    return this.http.post(url, country)
+                        .map(function (response) { return response.json(); })
+                        .catch(this.handleError);
+                };
+                AppService.prototype.deleteCountry = function (id) {
+                    if (id == null)
+                        throw new Error("id is required.");
+                    var url = this.countriesUrl + id;
+                    return this.http.delete(url)
+                        .catch(this.handleError);
+                };
                 AppService.prototype.handleError = function (error) {
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || "Server error");

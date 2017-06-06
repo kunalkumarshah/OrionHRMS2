@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,25 +10,25 @@ System.register(["@angular/core", "@angular/common"], function (exports_1, conte
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, common_1, INLINE_EDIT_CONTROL_VALUE_ACCESSOR, InlineEditComponent;
+    var core_1, forms_1, InlineEditComponent, InlineEditComponent_1;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (forms_1_1) {
+                forms_1 = forms_1_1;
             }
         ],
         execute: function () {
-            INLINE_EDIT_CONTROL_VALUE_ACCESSOR = new Provider(common_1.NG_VALUE_ACCESSOR, {
-                useExisting: core_1.forwardRef(function () { return InlineEditComponent; }),
-                multi: true
-            });
-            InlineEditComponent = (function () {
-                function InlineEditComponent() {
+            InlineEditComponent = InlineEditComponent_1 = (function () {
+                function InlineEditComponent(element, _renderer) {
+                    this._renderer = _renderer;
+                    this.onSave = new core_1.EventEmitter();
                     // The internal data model
                     this._value = '';
+                    this.preValue = '';
+                    this.editing = false;
                     // Placeholders for the onChange and onTouch callbacks
                     this.onChange = Function.prototype;
                     this.onTouched = Function.prototype;
@@ -51,21 +51,51 @@ System.register(["@angular/core", "@angular/common"], function (exports_1, conte
                 InlineEditComponent.prototype.writeValue = function (value) {
                     this._value = value;
                 };
-                // ControlValueAccessor interface
                 InlineEditComponent.prototype.registerOnChange = function (fn) { this.onChange = fn; };
-                // ControlValueAccessor interface
                 InlineEditComponent.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
                 ;
+                // Method to display the inline edit form and hide the <a> element
+                InlineEditComponent.prototype.edit = function (value) {
+                    var _this = this;
+                    this.preValue = value; // Store original value in case the form is cancelled
+                    this.editing = true;
+                    // Automatically focus input
+                    setTimeout(function (_) { return _this._renderer.invokeElementMethod(_this.inlineEditControl.nativeElement, 'focus', []); });
+                };
+                // Method to display the editable value as text and emit save event to host
+                InlineEditComponent.prototype.onSubmit = function (value) {
+                    this.onSave.emit(value);
+                    this.editing = false;
+                };
+                // Method to reset the editable value
+                InlineEditComponent.prototype.cancel = function (value) {
+                    this._value = this.preValue;
+                    this.editing = false;
+                };
                 return InlineEditComponent;
             }());
-            InlineEditComponent = __decorate([
+            __decorate([
+                core_1.ViewChild('inlineEditControl'),
+                __metadata("design:type", Object)
+            ], InlineEditComponent.prototype, "inlineEditControl", void 0);
+            __decorate([
+                core_1.Output(),
+                __metadata("design:type", core_1.EventEmitter)
+            ], InlineEditComponent.prototype, "onSave", void 0);
+            InlineEditComponent = InlineEditComponent_1 = __decorate([
                 core_1.Component({
                     selector: 'inline-edit',
-                    providers: [INLINE_EDIT_CONTROL_VALUE_ACCESSOR],
-                    styleUrls: ['./inline-edit.component.css'],
-                    templateUrl: './inline-edit.component.html'
+                    templateUrl: './inline-edit.component.html',
+                    styleUrls: ['./styles/inline-edit.component.css'],
+                    providers: [
+                        {
+                            provide: forms_1.NG_VALUE_ACCESSOR,
+                            useExisting: core_1.forwardRef(function () { return InlineEditComponent_1; }),
+                            multi: true
+                        }
+                    ]
                 }),
-                __metadata("design:paramtypes", [])
+                __metadata("design:paramtypes", [core_1.ElementRef, core_1.Renderer])
             ], InlineEditComponent);
             exports_1("InlineEditComponent", InlineEditComponent);
         }

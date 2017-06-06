@@ -23,27 +23,49 @@ namespace OrionHRMS2.API
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var country = _repository.GetEntity<Country>(id);
+            if (country != null)
+                return new ObjectResult(country);
+            else
+                return new NotFoundResult();
+            
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]Country country)
         {
+            if (country.Id.Equals(string.Empty))
+            {
+                return new ObjectResult(_repository.AddEntity<Country>(country));
+            }
+            else
+            {
+                var existingOne = _repository.GetEntity<Country>(country.Id);
+                existingOne.CountryName = country.CountryName;
+                _repository.UpdateEntity<Country>(existingOne);
+                return new ObjectResult(existingOne);
+            }
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(Guid id, [FromBody]Country country)
         {
+            var existingOne = _repository.GetEntity<Country>(country.Id);
+            existingOne.CountryName = country.CountryName;
+            _repository.UpdateEntity<Country>(existingOne);
+            return new ObjectResult(existingOne);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _repository.DeleteEntity<Country>(id);
+            return new StatusCodeResult(200);
         }
     }
 }

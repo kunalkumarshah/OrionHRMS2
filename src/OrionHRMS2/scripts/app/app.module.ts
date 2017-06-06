@@ -7,19 +7,24 @@ import { FormsModule } from "@angular/forms";
 import "rxjs/Rx";
 
 import { AppComponent } from "./app.component";
+import { CountryListComponent } from "./components/country-list.component";
+
+import { AppRouting } from "./app.routing"
 import { AppService } from "./services/app.service";
 
 @NgModule({
     // directives, components, and pipes
     declarations: [
         AppComponent,
+        CountryListComponent,
     ],
     // modules
     imports: [
         BrowserModule,
         HttpModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        AppRouting
 
     ],
     // providers

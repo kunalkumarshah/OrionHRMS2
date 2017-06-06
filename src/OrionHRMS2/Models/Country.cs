@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace OrionHRMS2.Models
 {
-    public partial class Country
+    public partial class Country : Entity
     {
         public Country()
         {
@@ -13,7 +13,6 @@ namespace OrionHRMS2.Models
             DicStateOrProvince = new HashSet<StateOrProvince>();
         }
 
-        public int CountryId { get; set; }
         public string CountryName { get; set; }
         public int RegionId { get; set; }
 

@@ -1,0 +1,21 @@
+﻿<div id="inlineEditWrapper">
+
+    <!-- editable value -->
+    <a>{{ value }}</a>
+
+    <!-- inline edit form -->
+    <form #inlineEditForm="ngForm" class="inlineEditForm form-inline">
+        <div class="form-group">
+
+            <!-- inline edit control  -->
+            <input #inlineEditControl class="form-control" [(ngModel)]="value" />
+
+            <!-- inline edit save and cancel buttons -->
+            <span>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
+                <button class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+            </span>
+
+        </div>
+    </form>
+</div>

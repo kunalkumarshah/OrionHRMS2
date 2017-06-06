@@ -46,12 +46,12 @@ namespace OrionHRMS2.Models
 
             modelBuilder.Entity<Country>(entity =>
             {
-                entity.HasKey(e => e.CountryId)
+                entity.HasKey(e => e.Id)
                     .HasName("PK_dicCountry");
-
+                entity.Ignore(e => e.ParentId);
                 entity.ToTable("dicCountry");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.Id).HasColumnName("CountryID");
 
                 entity.Property(e => e.CountryName)
                     .IsRequired()

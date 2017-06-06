@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/router", "@angular/forms", "rxjs/Rx", "./app.component", "./services/app.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/router", "@angular/forms", "rxjs/Rx", "./app.component", "./components/country-list.component", "./app.routing", "./services/app.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, http_1, router_1, forms_1, app_component_1, app_service_1, AppModule;
+    var core_1, platform_browser_1, http_1, router_1, forms_1, app_component_1, country_list_component_1, app_routing_1, app_service_1, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -30,6 +30,12 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
             function (app_component_1_1) {
                 app_component_1 = app_component_1_1;
             },
+            function (country_list_component_1_1) {
+                country_list_component_1 = country_list_component_1_1;
+            },
+            function (app_routing_1_1) {
+                app_routing_1 = app_routing_1_1;
+            },
             function (app_service_1_1) {
                 app_service_1 = app_service_1_1;
             }
@@ -45,13 +51,15 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                     // directives, components, and pipes
                     declarations: [
                         app_component_1.AppComponent,
+                        country_list_component_1.CountryListComponent,
                     ],
                     // modules
                     imports: [
                         platform_browser_1.BrowserModule,
                         http_1.HttpModule,
                         forms_1.FormsModule,
-                        router_1.RouterModule
+                        router_1.RouterModule,
+                        app_routing_1.AppRouting
                     ],
                     // providers
                     providers: [
