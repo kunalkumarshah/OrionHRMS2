@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+    <title>Orion HRMS2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- Step 1. Load libraries -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="js/shim.min.js"></script>
+    <script src="js/zone.js"></script>
+    <script src="js/Reflect.js"></script>
+    <script src="js/system.src.js"></script>
+
+    <!-- Angular2 Native Directives -->
+    <script src="/js/moment.js"></script>
+
+    <!-- Step 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+</head>
+<!-- Step 3. Display the application -->
+<body>
+    <!-- Application PlaceHolder -->
+    <orionhrms2>Please wait...</orionhrms2>    
+</body>
+</html>

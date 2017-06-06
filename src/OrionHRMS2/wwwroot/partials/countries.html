@@ -1,0 +1,38 @@
+﻿<style>
+    table, tr, td, th {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+
+<h2>{{title}}</h2>
+<table>
+    <tr>
+        <th></th>
+        <th>Country ID</th>
+        <th>Country Name</th>
+        <th>Region ID</th>
+        <th>Region Name</th>
+    </tr>
+    <tr *ngFor="let country of items">
+        <td>
+            <input type="checkbox" [(ngModel)]="country.state">
+        </td>
+        <td>
+            <p>{{country.countryId}}</p>
+        </td>
+        <td>
+            <input id="countryName" type="text" class="form-control" ng-model="country.countryName" *ngIf="countryEditing" />
+            <span *ngIf="!countryEditing"> {{country.countryName}}</span>
+        </td>
+        <td>
+            <span>{{country.region.regionId}} </span>
+        </td>
+        <td>
+            <span>{{country.region.regionName}} </span>
+        </td>
+        <td> <button type="button" [ngClass]="{disabled : !enableButton}" class="btn btn-default" (click)="getUserToEdit($event, user.userId)">{{editUserButtonCaption}}</button>
+        <td> <button type="button" class="btn btn-default" (click)="deleteUser(user.userId)">{{deleteUserButtonCaption}}</button>    
+    </tr>
+</table>
