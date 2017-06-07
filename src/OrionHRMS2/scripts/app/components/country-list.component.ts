@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router"; 
 import { Country } from "../viewmodels/Country";
 import { AppService } from "../services/app.service";
 
@@ -10,10 +11,10 @@ import { AppService } from "../services/app.service";
 export class CountryListComponent implements OnInit {
 
     items: Country[];
+    item: Country;
     errorMessage: string;
-
-    constructor(private appService: AppService) {
-        //called first time before the ngOnInit()
+    constructor(private appService: AppService, private router: Router, private route: ActivatedRoute) {
+        //called first time before the ngOnInit()        
     }
         
     ngOnInit() {
@@ -24,7 +25,13 @@ export class CountryListComponent implements OnInit {
             error => this.errorMessage = <any>error
         );
     }
-
+    public editCountry() {
+        this.appService.saveCountry(this.item).subscribe(
+            item => { this.item = item; this.router.navigate(['/countries']); },
+            error => console.log(error)
+        )
+    }
+   
     //public Expand(country: Country) {
     //    country.show = !country.show;
     //}

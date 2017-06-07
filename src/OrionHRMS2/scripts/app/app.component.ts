@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Country } from "./viewmodels/Country";
 import { AppService } from "./services/app.service";
 
 @Component({

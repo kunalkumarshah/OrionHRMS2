@@ -9,7 +9,7 @@ import "rxjs/Rx";
 import { AppComponent } from "./app.component";
 import { CountryListComponent } from "./components/country-list.component";
 
-import { AppRouting } from "./app.routing"
+import { AppRouting } from "./app.routing";
 import { AppService } from "./services/app.service";
 
 @NgModule({
@@ -24,6 +24,8 @@ import { AppService } from "./services/app.service";
         HttpModule,
         FormsModule,
         RouterModule,
+        InlineEditorModule,
+        //Ng2Bs3ModalModule,
         AppRouting
 
     ],
